@@ -4,7 +4,7 @@ echo PanXML
 
 echo - macdeployqt 
 
-cd ~/Development/aforge/panxml
+cd ~/Development/GitHub/PanXML
 
 rm -R '../../Distribution/PanXML/PanXML.app'
 cp -R './PanXML-build-Desktop_Qt_5_3_2_LLDB-Release/PanXML.app' '../../Distribution/PanXML/PanXML.app'
