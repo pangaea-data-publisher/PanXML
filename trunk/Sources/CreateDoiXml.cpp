@@ -329,30 +329,14 @@ QString MainWindow::buildIdentifierEntry( const QString& s_Tag, const QString& E
 
 void MainWindow::downloadXsdFile( const QString& s_Path, const QString& s_XmlSchema )
 {
-    QFile outfile( s_Path + "/" + s_XmlSchema );
+    QString s_FilenameLocal = s_Path + "/" + s_XmlSchema;
+
+    QFile outfile( s_FilenameLocal );
 
     if ( outfile.exists() == true )
         outfile.remove();
 
-    if ( outfile.open( QIODevice::WriteOnly | QIODevice::Text ) == true )
-    {
-        webfile m_webfile;
-
-        m_webfile.setUrl( QLatin1String( "http://www.pangaea.de/curator/files/" ) + s_XmlSchema );
-
-        if ( m_webfile.open() == true )
-        {
-            char    buffer[1024];
-            qint64  nSize = 0;
-
-            while ( ( nSize = m_webfile.read( buffer, sizeof( buffer ) ) ) > 0 )
-                outfile.write( buffer, nSize );
-
-            m_webfile.close();
-        }
-
-        outfile.close();
-    }
+    downloadFile( QLatin1String( "http://www.pangaea.de/curator/files/" ) + s_XmlSchema, s_FilenameLocal );
 }
 
 // ******************************************************************************************************
