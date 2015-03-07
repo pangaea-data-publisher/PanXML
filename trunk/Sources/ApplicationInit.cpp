@@ -1,5 +1,5 @@
 /* ApplicationMainWindow.cpp  */
-/* 2009-08-09                 */
+/* 2015-03-08                 */
 /* Dr. Rainer Sieger          */
 
 #include "Application.h"
