@@ -6,7 +6,7 @@
     const QString _PROGRAMDOI_          = "doi:10.1594/PANGAEA.746153";
     const QString _PROGRAMREADME_       = "http://wiki.pangaea.de/wiki/PanXML";
 
-    const QString _VERSION_	            = "2.2";	// Version number, 2014-11-19
+    const QString _VERSION_	            = "3.0";	// Version number, 2015-04-03
     const QChar	  _PSEPARATOR_			= '|';
 
     const int	_NOERROR_				= 0;

@@ -99,6 +99,7 @@ public:
     QString     gs_RelatedPublicationTitle;
     QString     gs_RelatedPublicationSource;
 
+    int CreateAmdXml( const QString& XmlPath, const QString& XmlSchema, const QString& Input );
     int CreateDoiXml( const QString& XmlPath, const QString& XmlSchema, const QString& Input );
     int CreateEPicXml( const QString& XmlPath, const QString& XmlSchema, const QString& Input );
 
@@ -108,6 +109,7 @@ public:
                              const QString& RelatedPublicationDate, const QString& RelatedPublicationTitle, const QString& RelatedPublicationSource );
 
     QString escapeChar( const QString& EntryStr );
+
     QString buildTextEntry( const QString& Tag = "Tag", const QString& EntryStr = "", const bool emptyElement = false );
     QString buildTextAttributeEntry( const QString& Tag = "Tag", const QString& AttributeName = "AttributeName", const QString& AttributeValue = "AttributeValue", const QString& EntryStr = "" );
     QString buildIdentifierEntry( const QString& s_Tag = "", const QString& EntryStr = "" );
@@ -143,6 +145,9 @@ private slots:
 
     int doSetOptionsDialog();
     int doCreateSingleDoiXmlDialog();
+
+    void doCreateAmdXml();
+    void doCreateAmdXmlTemplate();
 
     void doCreateDoiXml();
     void doCreateDoiXmlTemplate();
@@ -211,6 +216,8 @@ private:
     QAction *hideWindowAction;
     QAction *exitAction;
 
+    QAction *createAmdXmlAction;
+    QAction *createAmdXmlTemplateAction;
     QAction *createDoiXmlAction;
     QAction *createDoiXmlTemplateAction;
     QAction *createSingleDoiXmlDialogAction;

@@ -44,7 +44,11 @@ void MainWindow::createActions()
     exitAction->setShortcut(tr("Ctrl+Q"));
     connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
 
-    // TIB menu
+    //AMD
+    createAmdXmlAction = new QAction(tr("Dataset list -> XML files for AMD registration"), this);
+    connect(createAmdXmlAction, SIGNAL(triggered()), this, SLOT(doCreateAmdXml()));
+
+    // TIB
     createDoiXmlAction = new QAction(tr("Reference list -> XML files for DOI registration"), this);
     connect(createDoiXmlAction, SIGNAL(triggered()), this, SLOT(doCreateDoiXml()));
 
@@ -61,6 +65,9 @@ void MainWindow::createActions()
 */
 
     // Templates
+    createAmdXmlTemplateAction = new QAction(tr("Create dataset list as template"), this);
+    connect(createAmdXmlTemplateAction, SIGNAL(triggered()), this, SLOT(doCreateAmdXmlTemplate()));
+
     createDoiXmlTemplateAction = new QAction(tr("Create reference list as template"), this);
     connect(createDoiXmlTemplateAction, SIGNAL(triggered()), this, SLOT(doCreateDoiXmlTemplate()));
 
@@ -126,13 +133,15 @@ void MainWindow::createMenus()
 // **********************************************************************************************
 
     toolMenu = menuBar()->addMenu( tr( "Tools" ) );
-    toolMenu->addAction( createSingleDoiXmlDialogAction );
+    toolMenu->addAction( createAmdXmlAction );
     toolMenu->addAction( createDoiXmlAction );
     toolMenu->addSeparator();
+    toolMenu->addAction( createAmdXmlTemplateAction );
+    toolMenu->addAction( createDoiXmlTemplateAction );
+//  toolMenu->addAction( createSingleDoiXmlDialogAction );
 //  toolMenu->addAction( createSimpleEPicXmlAction );
 //  toolMenu->addAction( createEPicXmlAction );
 //  toolMenu->addSeparator();
-    toolMenu->addAction( createDoiXmlTemplateAction );
 
 // **********************************************************************************************
 

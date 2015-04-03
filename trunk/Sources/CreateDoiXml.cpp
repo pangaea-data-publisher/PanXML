@@ -372,7 +372,9 @@ void MainWindow::doCreateDoiXml()
                 {
                     if ( readFile( s_FilenameIn, sl_Input, gi_Codec ) > 1 )
                     {
-                        initProgress( gsl_FilenameList.count(), s_FilenameIn, tr( "Creating files..." ), sl_Input.count() ); j = 1;
+                        initProgress( gsl_FilenameList.count(), s_FilenameIn, tr( "Creating files..." ), sl_Input.count() );
+
+                        j = 1;
 
                         while ( ( j<sl_Input.count() ) && ( stopProgress != _APPBREAK_ ) )
                         {
