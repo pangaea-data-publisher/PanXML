@@ -110,12 +110,14 @@ public:
 
     QString escapeChar( const QString& EntryStr );
 
-    QString buildTextEntry( const QString& Tag = "Tag", const QString& EntryStr = "", const bool emptyElement = false );
+    QString buildTextEntry( const QString& Tag = "Tag", const QString& EntryStr = "", const int emptyElement = 2 );
     QString buildTextAttributeEntry( const QString& Tag = "Tag", const QString& AttributeName = "AttributeName", const QString& AttributeValue = "AttributeValue", const QString& EntryStr = "" );
     QString buildIdentifierEntry( const QString& s_Tag = "", const QString& EntryStr = "" );
     QString buildIntegerEntry( const QString& Tag = "Tag", const int = -999 );
     QString buildIntegerAttributeEntry( const QString& Tag = "Tag", const QString& AttributeName = "AttributeName", const QString& AttributeValue = "AttributeValue", const int = -999 );
     QString buildDoi( const QString& InputStr, const QString& s_ProceedingsTitle = "", const QString& s_PublicationDate = "", const QString& s_Volume = "", const QString& s_FirstPage = "" );
+    QString buildEmailEntry( const QString& Tag = "Tag", const QString& EntryStr = "" );
+    QString buildPhoneEntry( const QString& Tag = "Tag", const QString& EntryStr = "" );
 
     int calcNumOfPages( const QString& firstPage = "0", const QString& lastPage = "0" );
     int checkXmlFolder( const QString& XmlPath, const int n );

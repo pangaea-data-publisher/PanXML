@@ -58,6 +58,7 @@ SOURCES = ./Sources/ApplicationInit.cpp \
     ./Sources/ApplicationErrors.cpp \
     ./Sources/ApplicationPreferences.cpp \
     ./Sources/ApplicationCreateMenu.cpp \
+    ./Sources/BuildXmlEntry.cpp \
     ./Sources/CreateAmdXml.cpp \
     ./Sources/CreateDoiXml.cpp \
 #   ./Sources/CreateEPicXml.cpp \

@@ -11,41 +11,17 @@
 
 int MainWindow::CreateAmdXml( const QString& s_XmlPath, const QString& s_XmlSchema, const QString& InputStr )
 {
-    int             DOI                     = 0;
-    int             Authors                 = 1;
-    int             Title                   = 2;
-    int             PublicationDate         = 3;
-    int             ProceedingsVolume       = 4;
-    int             ProceedingsIssue        = 5;
-    int             firstPage               = 6;
-    int             lastPage                = 7;
-    int             Language                = 8;
-    int             Description             = 9;
-    int             Discipline              = 10;
-    int             ResourceIdentifiers     = 11;
-    int             ResourceType            = 12;
-    int             RelatedIdentifiers      = 13;
-    int             RelationType            = 14;
-    int             Format                  = 15;
-    int             ProceedingsTitle        = 16;
-    int             ProceedingsPublisher    = 17;
-    int             ProceedingsContributor  = 18;
-    int             PublicationPlace        = 19;
-    int             ProceedingsIdentifier   = 20;
-
-    QString         s_FilenameOut           = "";
-    QString         s_DOI                   = "";
+    int             i                       = 0;
 
     QString         tab                     = "\t";
+
+    QStringList     sl_OutStr;
 
     QDateTime       DateTime                = QDateTime::currentDateTime();
 
 // **********************************************************************************************
 
-    s_DOI           = buildDoi( InputStr.section( "\t", DOI, DOI ), InputStr.section( "\t", ProceedingsTitle, ProceedingsTitle ), InputStr.section( "\t", PublicationDate , PublicationDate ),  InputStr.section( "\t", ProceedingsVolume, ProceedingsVolume ),  InputStr.section( "\t", firstPage, firstPage ) );
-    s_FilenameOut   = s_DOI.section( "/", 1, 1 ) + ".xml";
-
-    QFile fout( s_XmlPath + "/" + s_FilenameOut );
+    QFile fout( s_XmlPath + "/" + InputStr.section( "\t", 0, 0 ) + ".xml" );
 
     if ( fout.open( QIODevice::WriteOnly | QIODevice::Text ) == false )
         return( -20 );
@@ -56,207 +32,229 @@ int MainWindow::CreateAmdXml( const QString& s_XmlPath, const QString& s_XmlSche
 
 // **********************************************************************************************
 
-    tout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-    tout << "<!-- created with PanXML (doi:10.1594/PANGAEA.746153) on " << DateTime.toString( "yyyy-MM-dd" ) << " -->" << endl;
-    tout << "<DIF xmlns=\"http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/\"" << endl;
-    tout << tab << "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << endl;
-    tout << tab << "xsi:schemaLocation=\"http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/ http://gcmd.nasa.gov/Aboutus/xml/dif/" << s_XmlSchema << "\">" << endl;
+    sl_OutStr.append( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" );
+    sl_OutStr.append( "<!-- created with PanXML (doi:10.1594/PANGAEA.746153) on " + DateTime.toString( "yyyy-MM-dd" ) + " -->" );
+    sl_OutStr.append( "<DIF xmlns=\"http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/\"" );
+    sl_OutStr.append( tab + "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" );
+    sl_OutStr.append( tab + "xsi:schemaLocation=\"http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/ http://gcmd.nasa.gov/Aboutus/xml/dif/" + s_XmlSchema + "\">"  );
 
-    tout << tab << "<Entry_ID></Entry_ID>" << endl;
-    tout << tab << "<Entry_Title></Entry_Title>" << endl;
-    tout << tab << "<Data_Set_Citation>" << endl;
-    tout << tab << tab << "<Dataset_Creator></Dataset_Creator>" << endl;
-    tout << tab << tab << "<Dataset_Editor></Dataset_Editor>" << endl;
-    tout << tab << tab << "<Dataset_Title></Dataset_Title>" << endl;
-    tout << tab << tab << "<Dataset_Series_Name></Dataset_Series_Name>" << endl;
-    tout << tab << tab << "<Dataset_Release_Date></Dataset_Release_Date>" << endl;
-    tout << tab << tab << "<Dataset_Release_Place></Dataset_Release_Place>" << endl;
-    tout << tab << tab << "<Dataset_Publisher></Dataset_Publisher>" << endl;
-    tout << tab << tab << "<Version></Version>" << endl;
-    tout << tab << tab << "<Issue_Identification></Issue_Identification>" << endl;
-    tout << tab << tab << "<Data_Presentation_Form></Data_Presentation_Form>" << endl;
-    tout << tab << tab << "<Other_Citation_Details></Other_Citation_Details>" << endl;
-    tout << tab << tab << "<Dataset_DOI></Dataset_DOI>" << endl;
-    tout << tab << tab << "<Online_Resource></Online_Resource>" << endl;
-    tout << tab << "</Data_Set_Citation>" << endl;
-    tout << tab << "<Personnel>" << endl;
-    tout << tab << tab << "<Role></Role>" << endl;
-    tout << tab << tab << "<First_Name></First_Name>" << endl;
-    tout << tab << tab << "<Middle_Name></Middle_Name>" << endl;
-    tout << tab << tab << "<Last_Name></Last_Name>" << endl;
-    tout << tab << tab << "<Email></Email>" << endl;
-    tout << tab << tab << "<Phone></Phone>" << endl;
-    tout << tab << tab << "<Fax></Fax>" << endl;
-    tout << tab << tab << "<Contact_Address>" << endl;
-    tout << tab << tab << tab << "<Address></Address>" << endl;
-    tout << tab << tab << tab << "<City></City>" << endl;
-    tout << tab << tab << tab << "<Province_or_State></Province_or_State>" << endl;
-    tout << tab << tab << tab << "<Postal_Code></Postal_Code>" << endl;
-    tout << tab << tab << tab << "<Country></Country>" << endl;
-    tout << tab << tab << "</Contact_Address>" << endl;
-    tout << tab << "</Personnel>" << endl;
-    tout << tab << "<Discipline>" << endl;
-    tout << tab << tab << "<Discipline_Name></Discipline_Name>" << endl;
-    tout << tab << tab << "<Subdiscipline></Subdiscipline>" << endl;
-    tout << tab << tab << "<Detailed_Subdiscipline></Detailed_Subdiscipline>" << endl;
-    tout << tab << "</Discipline>" << endl;
-    tout << tab << "<Parameters>" << endl;
-    tout << tab << tab << "<Category></Category>" << endl;
-    tout << tab << tab << "<Topic></Topic>" << endl;
-    tout << tab << tab << "<Term></Term>" << endl;
-    tout << tab << tab << "<Variable_Level_1></Variable_Level_1>" << endl;
-    tout << tab << tab << "<Variable_Level_2></Variable_Level_2>" << endl;
-    tout << tab << tab << "<Variable_Level_3></Variable_Level_3>" << endl;
-    tout << tab << tab << "<Detailed_Variable></Detailed_Variable>" << endl;
-    tout << tab << "</Parameters>" << endl;
-    tout << tab << "<ISO_Topic_Category></ISO_Topic_Category>" << endl;
-    tout << tab << "<Keyword></Keyword>" << endl;
-    tout << tab << "<Sensor_Name>" << endl;
-    tout << tab << tab << "<Short_Name></Short_Name>" << endl;
-    tout << tab << tab << "<Long_Name></Long_Name>" << endl;
-    tout << tab << "</Sensor_Name>" << endl;
-    tout << tab << "<Source_Name>" << endl;
-    tout << tab << tab << "<Short_Name></Short_Name>" << endl;
-    tout << tab << tab << "<Long_Name></Long_Name>" << endl;
-    tout << tab << "</Source_Name>" << endl;
-    tout << tab << "<Temporal_Coverage>" << endl;
-    tout << tab << tab << "<Start_Date></Start_Date>" << endl;
-    tout << tab << tab << "<Stop_Date></Stop_Date>" << endl;
-    tout << tab << "</Temporal_Coverage>" << endl;
-    tout << tab << "<Paleo_Temporal_Coverage>" << endl;
-    tout << tab << tab << "<Paleo_Start_Date></Paleo_Start_Date>" << endl;
-    tout << tab << tab << "<Paleo_Stop_Date></Paleo_Stop_Date>" << endl;
-    tout << tab << tab << "<Chronostratigraphic_Unit>" << endl;
-    tout << tab << tab << tab << "<Eon></Eon>" << endl;
-    tout << tab << tab << tab << "<Era></Era>" << endl;
-    tout << tab << tab << tab << "<Period></Period>" << endl;
-    tout << tab << tab << tab << "<Epoch></Epoch>" << endl;
-    tout << tab << tab << tab << "<Stage></Stage>" << endl;
-    tout << tab << tab << tab << "<Detailed_Classification></Detailed_Classification>" << endl;
-    tout << tab << tab << "</Chronostratigraphic_Unit>" << endl;
-    tout << tab << "</Paleo_Temporal_Coverage>" << endl;
-    tout << tab << "<Data_Set_Progress></Data_Set_Progress>" << endl;
-    tout << tab << "<Spatial_Coverage>" << endl;
-    tout << tab << tab << "<Southernmost_Latitude></Southernmost_Latitude>" << endl;
-    tout << tab << tab << "<Northernmost_Latitude></Northernmost_Latitude>" << endl;
-    tout << tab << tab << "<Westernmost_Longitude></Westernmost_Longitude>" << endl;
-    tout << tab << tab << "<Easternmost_Longitude></Easternmost_Longitude>" << endl;
-    tout << tab << tab << "<Minimum_Altitude></Minimum_Altitude>" << endl;
-    tout << tab << tab << "<Maximum_Altitude></Maximum_Altitude>" << endl;
-    tout << tab << tab << "<Minimum_Depth></Minimum_Depth>" << endl;
-    tout << tab << tab << "<Maximum_Depth></Maximum_Depth>" << endl;
-    tout << tab << "</Spatial_Coverage>" << endl;
-    tout << tab << "<Location>" << endl;
-    tout << tab << tab << "<Location_Category></Location_Category>" << endl;
-    tout << tab << tab << "<Location_Type></Location_Type>" << endl;
-    tout << tab << tab << "<Location_Subregion1></Location_Subregion1>" << endl;
-    tout << tab << tab << "<Location_Subregion2></Location_Subregion2>" << endl;
-    tout << tab << tab << "<Location_Subregion3></Location_Subregion3>" << endl;
-    tout << tab << tab << "<Detailed_Location></Detailed_Location>" << endl;
-    tout << tab << "</Location>" << endl;
-    tout << tab << "<Data_Resolution>" << endl;
-    tout << tab << tab << "<Latitude_Resolution></Latitude_Resolution>" << endl;
-    tout << tab << tab << "<Longitude_Resolution></Longitude_Resolution>" << endl;
-    tout << tab << tab << "<Horizontal_Resolution_Range></Horizontal_Resolution_Range>" << endl;
-    tout << tab << tab << "<Vertical_Resolution></Vertical_Resolution>" << endl;
-    tout << tab << tab << "<Vertical_Resolution_Range></Vertical_Resolution_Range>" << endl;
-    tout << tab << tab << "<Temporal_Resolution></Temporal_Resolution>" << endl;
-    tout << tab << tab << "<Temporal_Resolution_Range></Temporal_Resolution_Range>" << endl;
-    tout << tab << "</Data_Resolution>" << endl;
-    tout << tab << "<Project>" << endl;
-    tout << tab << tab << "<Short_Name></Short_Name>" << endl;
-    tout << tab << tab << "<Long_Name></Long_Name>" << endl;
-    tout << tab << "</Project>" << endl;
-    tout << tab << "<Quality></Quality>" << endl;
-    tout << tab << "<Access_Constraints></Access_Constraints>" << endl;
-    tout << tab << "<Use_Constraints></Use_Constraints>" << endl;
-    tout << tab << "<Data_Set_Language></Data_Set_Language>" << endl;
-    tout << tab << "<Originating_Center></Originating_Center>" << endl;
-    tout << tab << "<Data_Center>" << endl;
-    tout << tab << tab << "<Data_Center_Name>" << endl;
-    tout << tab << tab << tab << "<Short_Name></Short_Name>" << endl;
-    tout << tab << tab << tab << "<Long_Name></Long_Name>" << endl;
-    tout << tab << tab << "</Data_Center_Name>" << endl;
-    tout << tab << tab << "<Data_Center_URL></Data_Center_URL>" << endl;
-    tout << tab << tab << "<Data_Set_ID></Data_Set_ID>" << endl;
-    tout << tab << tab << "<Personnel>" << endl;
-    tout << tab << tab << tab << "<Role></Role>" << endl;
-    tout << tab << tab << tab << "<First_Name></First_Name>" << endl;
-    tout << tab << tab << tab << "<Middle_Name></Middle_Name>" << endl;
-    tout << tab << tab << tab << "<Last_Name></Last_Name>" << endl;
-    tout << tab << tab << tab << "<Email></Email>" << endl;
-    tout << tab << tab << tab << "<Phone></Phone>" << endl;
-    tout << tab << tab << tab << "<Fax></Fax>" << endl;
-    tout << tab << tab << tab << "<Contact_Address>" << endl;
-    tout << tab << tab << tab << tab << "<Address></Address>" << endl;
-    tout << tab << tab << tab << tab << "<City></City>" << endl;
-    tout << tab << tab << tab << tab << "<Province_or_State></Province_or_State>" << endl;
-    tout << tab << tab << tab << tab << "<Postal_Code></Postal_Code>" << endl;
-    tout << tab << tab << tab << tab << "<Country></Country>" << endl;
-    tout << tab << tab << tab << "</Contact_Address>" << endl;
-    tout << tab << tab << "</Personnel>" << endl;
-    tout << tab << "</Data_Center>" << endl;
-    tout << tab << "<Distribution>" << endl;
-    tout << tab << tab << "<Distribution_Media></Distribution_Media>" << endl;
-    tout << tab << tab << "<Distribution_Size></Distribution_Size>" << endl;
-    tout << tab << tab << "<Distribution_Format></Distribution_Format>" << endl;
-    tout << tab << tab << "<Fees></Fees>" << endl;
-    tout << tab << "</Distribution>" << endl;
-    tout << tab << "<Multimedia_Sample>" << endl;
-    tout << tab << tab << "<File></File>" << endl;
-    tout << tab << tab << "<URL></URL>" << endl;
-    tout << tab << tab << "<Format></Format>" << endl;
-    tout << tab << tab << "<Caption></Caption>" << endl;
-    tout << tab << tab << "<Description></Description>" << endl;
-    tout << tab << "</Multimedia_Sample>" << endl;
-    tout << tab << "<Reference>" << endl;
-    tout << tab << tab << "<Author></Author>" << endl;
-    tout << tab << tab << "<Publication_Date></Publication_Date>" << endl;
-    tout << tab << tab << "<Title></Title>" << endl;
-    tout << tab << tab << "<Series></Series>" << endl;
-    tout << tab << tab << "<Edition></Edition>" << endl;
-    tout << tab << tab << "<Volume></Volume>" << endl;
-    tout << tab << tab << "<Issue></Issue>" << endl;
-    tout << tab << tab << "<Report_Number></Report_Number>" << endl;
-    tout << tab << tab << "<Publication_Place></Publication_Place>" << endl;
-    tout << tab << tab << "<Publisher></Publisher>" << endl;
-    tout << tab << tab << "<Pages></Pages>" << endl;
-    tout << tab << tab << "<ISBN></ISBN>" << endl;
-    tout << tab << tab << "<DOI></DOI>" << endl;
-    tout << tab << tab << "<Online_Resource></Online_Resource>" << endl;
-    tout << tab << tab << "<Other_Reference_Details></Other_Reference_Details>" << endl;
-    tout << tab << "</Reference>" << endl;
-    tout << tab << "<Summary>" << endl;
-    tout << tab << tab << "<Abstract></Abstract>" << endl;
-    tout << tab << tab << "<Purpose></Purpose>" << endl;
-    tout << tab << "</Summary>" << endl;
-    tout << tab << "<Related_URL>" << endl;
-    tout << tab << tab << "<URL_Content_Type>" << endl;
-    tout << tab << tab << tab << "<Type></Type>" << endl;
-    tout << tab << tab << tab << "<Subtype></Subtype>" << endl;
-    tout << tab << tab << "</URL_Content_Type>" << endl;
-    tout << tab << tab << "<URL></URL>" << endl;
-    tout << tab << tab << "<Description></Description>" << endl;
-    tout << tab << "</Related_URL>" << endl;
-    tout << tab << "<Parent_DIF></Parent_DIF>" << endl;
-    tout << tab << "<IDN_Node>" << endl;
-    tout << tab << tab << "<Short_Name></Short_Name>" << endl;
-    tout << tab << tab << "<Long_Name></Long_Name>" << endl;
-    tout << tab << "</IDN_Node>" << endl;
-    tout << tab << "<Originating_Metadata_Node></Originating_Metadata_Node>" << endl;
-    tout << tab << "<Metadata_Name></Metadata_Name>" << endl;
-    tout << tab << "<Extended_Metadata>" << endl;
-    tout << tab << tab << "<Group></Group>" << endl;
-    tout << tab << tab << "<Name></Name>" << endl;
-    tout << tab << tab << "<Value></Value>" << endl;
-    tout << tab << "</Extended_Metadata>" << endl;
-    tout << tab << "<Metadata_Version></Metadata_Version>" << endl;
-    tout << tab << "<DIF_Creation_Date></DIF_Creation_Date>" << endl;
-    tout << tab << "<Last_DIF_Revision_Date></Last_DIF_Revision_Date>" << endl;
-    tout << tab << "<DIF_Revision_History></DIF_Revision_History>" << endl;
-    tout << tab << "<Future_DIF_Review_Date></Future_DIF_Review_Date>" << endl;
-    tout << tab << "<Private></Private>" << endl;
-    tout << "</DIF>" << endl;
+    sl_OutStr.append( tab + buildTextEntry( "Entry_ID", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Entry_Title", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "<Data_Set_Citation>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Creator", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Editor", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Title", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Series_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Release_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Release_Place", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_Publisher", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Version", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Issue_Identification", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Data_Presentation_Form", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Other_Citation_Details", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Dataset_DOI", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Online_Resource", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Data_Set_Citation>" );
+    sl_OutStr.append( tab + "<Personnel>" ); // PI
+    sl_OutStr.append( tab + tab + buildTextEntry( "Role", "INVESTIGATOR", 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "First_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Middle_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Last_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildEmailEntry( "Email", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + buildPhoneEntry( "Phone", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + buildPhoneEntry( "Fax", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + "<Contact_Address>" );
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Address", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "City", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Province_or_State", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Postal_Code", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Country", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "</Contact_Address>" );
+    sl_OutStr.append( tab + "</Personnel>" );
+    sl_OutStr.append( tab + "<Personnel>" ); // DIF Author
+    sl_OutStr.append( tab + tab + buildTextEntry( "Role", "DIF AUTHOR", 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "First_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Middle_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Last_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildEmailEntry( "Email", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + buildPhoneEntry( "Phone", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + buildPhoneEntry( "Fax", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + "<Contact_Address>" );
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Address", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "City", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Province_or_State", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Postal_Code", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Country", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "</Contact_Address>" );
+    sl_OutStr.append( tab + "</Personnel>" );
+    sl_OutStr.append( tab + "<Discipline>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Discipline_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Subdiscipline", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Detailed_Subdiscipline", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Discipline>" );
+    sl_OutStr.append( tab + "<Parameters>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Category", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Topic", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Term", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Variable_Level_1", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Variable_Level_2", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Variable_Level_3", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Detailed_Variable", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Parameters>" );
+    sl_OutStr.append( tab + buildTextEntry( "ISO_Topic_Category", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Keyword", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "<Sensor_Name>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Short_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Long_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Sensor_Name>" );
+    sl_OutStr.append( tab + "<Source_Name>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Short_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Long_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Source_Name>" );
+    sl_OutStr.append( tab + "<Temporal_Coverage>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Start_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Stop_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Temporal_Coverage>" );
+    sl_OutStr.append( tab + "<Paleo_Temporal_Coverage>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Paleo_Start_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Paleo_Stop_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "<Chronostratigraphic_Unit>" );
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Eon", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Era", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Period", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Epoch", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Stage", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Detailed_Classification", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "</Chronostratigraphic_Unit>" );
+    sl_OutStr.append( tab + "</Paleo_Temporal_Coverage>" );
+    sl_OutStr.append( tab + buildTextEntry( "Data_Set_Progress", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "<Spatial_Coverage>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Southernmost_Latitude", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Northernmost_Latitude", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Westernmost_Longitude", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Easternmost_Longitude", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Minimum_Altitude", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Maximum_Altitude", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Minimum_Depth", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Maximum_Depth", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Spatial_Coverage>" );
+    sl_OutStr.append( tab + "<Location>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Location_Category", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Location_Type", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Location_Subregion1", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Location_Subregion2", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Location_Subregion3", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Detailed_Location", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Location>" );
+    sl_OutStr.append( tab + "<Data_Resolution>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Latitude_Resolution", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Longitude_Resolution", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Horizontal_Resolution_Range", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Vertical_Resolution", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Vertical_Resolution_Range", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Temporal_Resolution", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Temporal_Resolution_Range", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Data_Resolution>" );
+    sl_OutStr.append( tab + "<Project>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Short_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Long_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Project>" );
+    sl_OutStr.append( tab + buildTextEntry( "Quality", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Access_Constraints", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Use_Constraints", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Data_Set_Language", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Originating_Center", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "<Data_Center>" );
+    sl_OutStr.append( tab + tab + "<Data_Center_Name>" );
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Short_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Long_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "</Data_Center_Name>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Data_Center_URL", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Data_Set_ID", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "<Personnel>" );
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Role", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "First_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Middle_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Last_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildEmailEntry( "Email", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildPhoneEntry( "Phone", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildPhoneEntry( "Fax", InputStr.section( "\t", i, i ) ) ); i++;
+    sl_OutStr.append( tab + tab + tab + "<Contact_Address>" );
+    sl_OutStr.append( tab + tab + tab + tab + buildTextEntry( "Address", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + tab + buildTextEntry( "City", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + tab + buildTextEntry( "Province_or_State", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + tab + buildTextEntry( "Postal_Code", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + tab + buildTextEntry( "Country", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + "</Contact_Address>" );
+    sl_OutStr.append( tab + tab + "</Personnel>" );
+    sl_OutStr.append( tab + "</Data_Center>" );
+    sl_OutStr.append( tab + "<Distribution>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Distribution_Media", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Distribution_Size", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Distribution_Format", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Fees", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Distribution>" );
+    sl_OutStr.append( tab + "<Multimedia_Sample>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "File", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "URL", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Format", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Caption", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Description", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Multimedia_Sample>" );
+    sl_OutStr.append( tab + "<Reference>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Author", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Publication_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Title", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Series", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Edition", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Volume", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Issue", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Report_Number", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Publication_Place", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Publisher", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Pages", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "ISBN", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "DOI", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Online_Resource", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Other_Reference_Details", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Reference>" );
+    sl_OutStr.append( tab + "<Summary>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Abstract", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Purpose", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Summary>" );
+    sl_OutStr.append( tab + "<Related_URL>" );
+    sl_OutStr.append( tab + tab + "<URL_Content_Type>" );
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Type", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + tab + buildTextEntry( "Subtype", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + "</URL_Content_Type>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "URL", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Description", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Related_URL>" );
+    sl_OutStr.append( tab + buildTextEntry( "Parent_DIF", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "<IDN_Node>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Short_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Long_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</IDN_Node>" );
+    sl_OutStr.append( tab + buildTextEntry( "Originating_Metadata_Node", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Metadata_Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "<Extended_Metadata>" );
+    sl_OutStr.append( tab + tab + buildTextEntry( "Group", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Name", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + tab + buildTextEntry( "Value", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + "</Extended_Metadata>" );
+    sl_OutStr.append( tab + buildTextEntry( "Metadata_Version", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "DIF_Creation_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Last_DIF_Revision_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "DIF_Revision_History", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Future_DIF_Review_Date", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( tab + buildTextEntry( "Private", InputStr.section( "\t", i, i ), 0 ) ); i++;
+    sl_OutStr.append( "</DIF>" );
+
+    for ( int i=0; i<sl_OutStr.count(); i++ )
+    {
+        if ( sl_OutStr.at( i ).contains( "<EMPTY>" ) == false )
+            tout << sl_OutStr.at( i ) << endl;
+    }
 
     fout.close();
 
@@ -389,8 +387,88 @@ void MainWindow::doCreateAmdXmlTemplate()
         {
             QTextStream tout( &fout );
 
-            tout << "Entry\tEntry\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tData_Set_Citation\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tPersonnel\tDiscipline\tDiscipline\tDiscipline\tParameters\tParameters\tParameters\tParameters\tParameters\tParameters\tParameters\tParameters\t\t\tSensor_Name\tSensor_Name\tSource_Name\tSource_Name\tTemporal_Coverage\tTemporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\tPaleo_Temporal_Coverage\t\tSpatial_Coverage\tSpatial_Coverage\tSpatial_Coverage\tSpatial_Coverage\tSpatial_Coverage\tSpatial_Coverage\tSpatial_Coverage\tSpatial_Coverage\tLocation\tLocation\tLocation\tLocation\tLocation\tLocation\tData_Resolution\tData_Resolution\tData_Resolution\tData_Resolution\tData_Resolution\tData_Resolution\tData_Resolution\tProject\tProject\t\t\t\t\t\tData_Center\tData_Center\tData_Center\tData_Center\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tData_Center_Personnel\tDistribution\tDistribution\tDistribution\tDistribution\tMultimedia_Sample\tMultimedia_Sample\tMultimedia_Sample\tMultimedia_Sample\tMultimedia_Sample\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tReference\tSummary\tSummary\tRelated_URL\tRelated_URL\tRelated_URL\tRelated_URL\t\tIDN_Node\tIDN_Node\t\t\tExtended_Metadata\tExtended_Metadata\tExtended_Metadata" << endl;
-            tout << "Entry_ID\tEntry_Title\tDataset_Creator\tDataset_Editor\tDataset_Title\tDataset_Series_Name\tDataset_Release_Date\tDataset_Release_Place\tDataset_Publisher\tVersion\tIssue_Identification\tData_Presentation_Form\tOther_Citation_Details\tDataset_DOI\tOnline_Resource\tRole\tFirst_Name\tMiddle_Name\tLast_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\tDiscipline_Name\tSubdiscipline\tDetailed_Subdiscipline\tParameters\tCategory\tTopic\tTerm\tVariable_Level_1\tVariable_Level_2\tVariable_Level_3\tDetailed_Variable\tISO_Topic_Category\tKeyword\tShort_Name\tLong_Name\tShort_Name\tLong_Name\tStart_Date\tStop_Date\tPaleo_Start_Date\tPaleo_Stop_Date\tEon\tEra\tPeriod\tEpoch\tStage\tDetailed_Classification\tData_Set_Progress\tSouthernmost_Latitude\tNorthernmost_Latitude\tWesternmost_Longitude\tEasternmost_Longitude\tMinimum_Altitude\tMaximum_Altitude\tMinimum_Depth\tMaximum_Depth\tLocation_Category\tLocation_Type\tLocation_Subregion1\tLocation_Subregion2\tLocation_Subregion3\tDetailed_Location\tLatitude_Resolution\tLongitude_Resolution\tHorizontal_Resolution_Range\tVertical_Resolution\tVertical_Resolution_Range\tTemporal_Resolution\tTemporal_Resolution_Range\tShort_Name\tLong_Name\tQuality\tAccess_Constraints\tUse_Constraints\tData_Set_Language\tOriginating_Center\tShort_Name\tLong_Name\tData_Center_URL\tData_Set_ID\tRole\tFirst_Name\tMiddle_Name\tLast_Name\tEmail\tPhone\tFax\tContact_Address\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\tDistribution_Media\tDistribution_Size\tDistribution_Format\tFees\tFile\tURL\tFormat\tCaption\tDescription\tAuthor\tPublication_Date\tTitle\tSeries\tEdition\tVolume\tIssue\tReport_Number\tPublication_Place\tPublisher\tPages\tISBN\tDOI\tOnline_Resource\tOther_Reference_Details\tAbstract\tPurpose\tType\tSubtype\tURL\tDescription\tParent_DIF\tShort_Name\tLong_Name\tOriginating_Metadata_Node\tMetadata_Name\tGroup\tName\tValue\tMetadata_Version\tDIF_Creation_Date\tLast_DIF_Revision_Date\tDIF_Revision_History\tFuture_DIF_Review_Date\tPrivate" << endl;
+            tout << "Entry\tEntry\t";
+
+            for ( int i=1; i<=13; i++ )
+                tout << "Data_Set_Citation\t";
+
+            for ( int i=1; i<=12; i++ )
+                tout << "PI\t";
+
+            for ( int i=1; i<=12; i++ )
+                tout << "DIF Author\t";
+
+            for ( int i=1; i<=3; i++ )
+                tout << "Discipline\t";
+
+            for ( int i=1; i<=7; i++ )
+                tout << "Parameters\t";
+
+            tout << "\t\t";
+
+            tout << "Sensor_Name\tSensor_Name\t";
+            tout << "Source_Name\tSource_Name\t";
+            tout << "Temporal_Coverage\tTemporal_Coverage\t";
+
+            for ( int i=1; i<=8; i++ )
+                tout << "Paleo_Temporal_Coverage\t";
+
+            tout << "\t";
+
+            for ( int i=1; i<=8; i++ )
+                tout << "Spatial_Coverage\t";
+
+            for ( int i=1; i<=6; i++ )
+                tout << "Location\t";
+
+            for ( int i=1; i<=7; i++ )
+                tout << "Data_Resolution\t";
+
+            tout << "Project\tProject\t\t\t\t\t\t";
+
+            for ( int i=1; i<=3; i++ )
+                tout << "Data_Center\t";
+
+            for ( int i=1; i<=12; i++ )
+                tout << "Data_Center_Personnel\t";
+
+            for ( int i=1; i<=4; i++ )
+                tout << "Distribution\t";
+
+            for ( int i=1; i<=5; i++ )
+                tout << "Multimedia_Sample\t";
+
+            for ( int i=1; i<=15; i++ )
+                tout << "Reference\t";
+
+            tout << "Summary\tSummary\t";
+
+            for ( int i=1; i<=4; i++ )
+                tout << "Related_URL\t";
+
+            tout << "\tIDN_Node\tIDN_Node\t\t\t";
+
+            tout << "Extended_Metadata\tExtended_Metadata\tExtended_Metadata" << endl;
+
+            tout << "Entry_ID\tEntry_Title\tDataset_Creator\tDataset_Editor\tDataset_Title\tDataset_Series_Name\t";
+            tout << "Dataset_Release_Date\tDataset_Release_Place\tDataset_Publisher\tVersion\tIssue_Identification\t";
+            tout << "Data_Presentation_Form\tOther_Citation_Details\tDataset_DOI\tOnline_Resource\t";
+            tout << "Role\tFirst_Name\tMiddle_Name\tLast_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\t"; // PI
+            tout << "Role\tFirst_Name\tMiddle_Name\tLast_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\t"; // Editor
+            tout << "Discipline_Name\tSubdiscipline\tDetailed_Subdiscipline\tCategory\tTopic\tTerm\tVariable_Level_1\t";
+            tout << "Variable_Level_2\tVariable_Level_3\tDetailed_Variable\tISO_Topic_Category\tKeyword\tShort_Name\t";
+            tout << "Long_Name\tShort_Name\tLong_Name\tStart_Date\tStop_Date\tPaleo_Start_Date\tPaleo_Stop_Date\tEon\tEra\t";
+            tout << "Period\tEpoch\tStage\tDetailed_Classification\tData_Set_Progress\tSouthernmost_Latitude\tNorthernmost_Latitude\t";
+            tout << "Westernmost_Longitude\tEasternmost_Longitude\tMinimum_Altitude\tMaximum_Altitude\tMinimum_Depth\tMaximum_Depth\t";
+            tout << "Location_Category\tLocation_Type\tLocation_Subregion1\tLocation_Subregion2\tLocation_Subregion3\tDetailed_Location\t";
+            tout << "Latitude_Resolution\tLongitude_Resolution\tHorizontal_Resolution_Range\tVertical_Resolution\tVertical_Resolution_Range\t";
+            tout << "Temporal_Resolution\tTemporal_Resolution_Range\tShort_Name\tLong_Name\tQuality\tAccess_Constraints\tUse_Constraints\t";
+            tout << "Data_Set_Language\tOriginating_Center\tShort_Name\tLong_Name\tData_Center_URL\tData_Set_ID\tRole\tFirst_Name\tMiddle_Name\t";
+            tout << "Last_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\tDistribution_Media\tDistribution_Size\t";
+            tout << "Distribution_Format\tFees\tFile\tURL\tFormat\tCaption\tDescription\tAuthor\tPublication_Date\tTitle\tSeries\tEdition\tVolume\t";
+            tout << "Issue\tReport_Number\tPublication_Place\tPublisher\tPages\tISBN\tDOI\tOnline_Resource\tOther_Reference_Details\tAbstract\t";
+            tout << "Purpose\tType\tSubtype\tURL\tDescription\tParent_DIF\tShort_Name\tLong_Name\tOriginating_Metadata_Node\tMetadata_Name\tGroup\t";
+            tout << "Name\tValue\tMetadata_Version\tDIF_Creation_Date\tLast_DIF_Revision_Date\tDIF_Revision_History\tFuture_DIF_Review_Date\tPrivate" << endl;
 
             fout.close();
 
