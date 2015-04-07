@@ -86,7 +86,7 @@ int MainWindow::doSetOptionsDialog()
     dialog.browseDir_pushButton->setWhatsThis( "Browse for the output directory" );
 
     dialog.move( posDialog );
-    dialog.resize( dialog.sizeHint() );
+    dialog.resize( sizeDialog );
     dialog.show();
 
 // ******************************************************************************************************
