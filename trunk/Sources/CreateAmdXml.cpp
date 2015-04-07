@@ -390,7 +390,7 @@ void MainWindow::doCreateAmdXmlTemplate()
             tout << "Entry\tEntry\t";
 
             for ( int i=1; i<=13; i++ )
-                tout << "Data_Set_Citation\t";
+                tout << "Dataset Citation\t";
 
             for ( int i=1; i<=12; i++ )
                 tout << "PI\t";
@@ -406,37 +406,37 @@ void MainWindow::doCreateAmdXmlTemplate()
 
             tout << "\t\t";
 
-            tout << "Sensor_Name\tSensor_Name\t";
-            tout << "Source_Name\tSource_Name\t";
-            tout << "Temporal_Coverage\tTemporal_Coverage\t";
+            tout << "Instrument (Sensor Name)\tInstrument (Sensor Name)\t";
+            tout << "Platform (Source Name)\tPlatform (Source Name)\t";
+            tout << "Temporal Coverage\tTemporal Coverage\t";
 
             for ( int i=1; i<=8; i++ )
-                tout << "Paleo_Temporal_Coverage\t";
+                tout << "Paleo Temporal Coverage\t";
 
             tout << "\t";
 
             for ( int i=1; i<=8; i++ )
-                tout << "Spatial_Coverage\t";
+                tout << "Spatial Coverage\t";
 
             for ( int i=1; i<=6; i++ )
                 tout << "Location\t";
 
             for ( int i=1; i<=7; i++ )
-                tout << "Data_Resolution\t";
+                tout << "Data Resolution\t";
 
             tout << "Project\tProject\t\t\t\t\t\t";
 
-            for ( int i=1; i<=3; i++ )
-                tout << "Data_Center\t";
+            for ( int i=1; i<=4; i++ )
+                tout << "Data Center\t";
 
             for ( int i=1; i<=12; i++ )
-                tout << "Data_Center_Personnel\t";
+                tout << "Data Center Personnel\t";
 
             for ( int i=1; i<=4; i++ )
                 tout << "Distribution\t";
 
             for ( int i=1; i<=5; i++ )
-                tout << "Multimedia_Sample\t";
+                tout << "Multimedia Sample\t";
 
             for ( int i=1; i<=15; i++ )
                 tout << "Reference\t";
@@ -446,29 +446,29 @@ void MainWindow::doCreateAmdXmlTemplate()
             for ( int i=1; i<=4; i++ )
                 tout << "Related_URL\t";
 
-            tout << "\tIDN_Node\tIDN_Node\t\t\t";
+            tout << "\tIDN Node\tIDN Node\t\t\t";
 
-            tout << "Extended_Metadata\tExtended_Metadata\tExtended_Metadata" << endl;
+            tout << "Extended Metadata\tExtended Metadata\tExtended Metadata" << endl;
 
-            tout << "Entry_ID\tEntry_Title\tDataset_Creator\tDataset_Editor\tDataset_Title\tDataset_Series_Name\t";
-            tout << "Dataset_Release_Date\tDataset_Release_Place\tDataset_Publisher\tVersion\tIssue_Identification\t";
-            tout << "Data_Presentation_Form\tOther_Citation_Details\tDataset_DOI\tOnline_Resource\t";
-            tout << "Role\tFirst_Name\tMiddle_Name\tLast_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\t"; // PI
-            tout << "Role\tFirst_Name\tMiddle_Name\tLast_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\t"; // Editor
-            tout << "Discipline_Name\tSubdiscipline\tDetailed_Subdiscipline\tCategory\tTopic\tTerm\tVariable_Level_1\t";
-            tout << "Variable_Level_2\tVariable_Level_3\tDetailed_Variable\tISO_Topic_Category\tKeyword\tShort_Name\t";
-            tout << "Long_Name\tShort_Name\tLong_Name\tStart_Date\tStop_Date\tPaleo_Start_Date\tPaleo_Stop_Date\tEon\tEra\t";
-            tout << "Period\tEpoch\tStage\tDetailed_Classification\tData_Set_Progress\tSouthernmost_Latitude\tNorthernmost_Latitude\t";
-            tout << "Westernmost_Longitude\tEasternmost_Longitude\tMinimum_Altitude\tMaximum_Altitude\tMinimum_Depth\tMaximum_Depth\t";
-            tout << "Location_Category\tLocation_Type\tLocation_Subregion1\tLocation_Subregion2\tLocation_Subregion3\tDetailed_Location\t";
-            tout << "Latitude_Resolution\tLongitude_Resolution\tHorizontal_Resolution_Range\tVertical_Resolution\tVertical_Resolution_Range\t";
-            tout << "Temporal_Resolution\tTemporal_Resolution_Range\tShort_Name\tLong_Name\tQuality\tAccess_Constraints\tUse_Constraints\t";
-            tout << "Data_Set_Language\tOriginating_Center\tShort_Name\tLong_Name\tData_Center_URL\tData_Set_ID\tRole\tFirst_Name\tMiddle_Name\t";
-            tout << "Last_Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince_or_State\tPostal_Code\tCountry\tDistribution_Media\tDistribution_Size\t";
-            tout << "Distribution_Format\tFees\tFile\tURL\tFormat\tCaption\tDescription\tAuthor\tPublication_Date\tTitle\tSeries\tEdition\tVolume\t";
-            tout << "Issue\tReport_Number\tPublication_Place\tPublisher\tPages\tISBN\tDOI\tOnline_Resource\tOther_Reference_Details\tAbstract\t";
-            tout << "Purpose\tType\tSubtype\tURL\tDescription\tParent_DIF\tShort_Name\tLong_Name\tOriginating_Metadata_Node\tMetadata_Name\tGroup\t";
-            tout << "Name\tValue\tMetadata_Version\tDIF_Creation_Date\tLast_DIF_Revision_Date\tDIF_Revision_History\tFuture_DIF_Review_Date\tPrivate" << endl;
+            tout << "Entry ID\tEntry Title\tDataset Creator\tDataset Editor\tDataset Title\tDataset Series Name\t";
+            tout << "Dataset Release Date\tDataset Release Place\tDataset Publisher\tVersion\tIssue Identification\t";
+            tout << "Data Presentation Form\tOther Citation Details\tDataset DOI\tOnline Resource\t";
+            tout << "Role\tFirst Name\tMiddle Name\tLast Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince or State\tPostal Code\tCountry\t"; // PI
+            tout << "Role\tFirst Name\tMiddle Name\tLast Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince or State\tPostal Code\tCountry\t"; // Editor
+            tout << "Discipline Name\tSubdiscipline\tDetailed Subdiscipline\tCategory\tTopic\tTerm\tVariable Level 1\t";
+            tout << "Variable Level 2\tVariable Level 3\tDetailed Variable\tISO Topic Category\tKeyword\tShort Name\t";
+            tout << "Long Name\tShort Name\tLong Name\tStart Date\tStop Date\tPaleo Start Date\tPaleo Stop Date\tEon\tEra\t";
+            tout << "Period\tEpoch\tStage\tDetailed Classification\tData Set Progress\tSouthernmost Latitude\tNorthernmost Latitude\t";
+            tout << "Westernmost Longitude\tEasternmost Longitude\tMinimum Altitude\tMaximum Altitude\tMinimum Depth\tMaximum Depth\t";
+            tout << "Location Category\tLocation Type\tLocation Subregion1\tLocation Subregion2\tLocation Subregion3\tDetailed Location\t";
+            tout << "Latitude Resolution\tLongitude Resolution\tHorizontal Resolution Range\tVertical Resolution\tVertical Resolution Range\t";
+            tout << "Temporal Resolution\tTemporal Resolution Range\tShort Name\tLong Name\tQuality\tAccess Constraints\tUse Constraints\t";
+            tout << "Data Set Language\tOriginating Center\tShort Name\tLong Name\tData Center URL\tData Set ID\tRole\tFirst Name\tMiddle Name\t";
+            tout << "Last Name\tEmail\tPhone\tFax\tAddress\tCity\tProvince or State\tPostal Code\tCountry\tDistribution Media\tDistribution Size\t";
+            tout << "Distribution Format\tFees\tFile\tURL\tFormat\tCaption\tDescription\tAuthor\tPublication Date\tTitle\tSeries\tEdition\tVolume\t";
+            tout << "Issue\tReport Number\tPublication Place\tPublisher\tPages\tISBN\tDOI\tOnline Resource\tOther Reference Details\tAbstract\t";
+            tout << "Purpose\tType\tSubtype\tURL\tDescription\tParent DIF\tShort Name\tLong Name\tOriginating Metadata Node\tMetadata Name\tGroup\t";
+            tout << "Name\tValue\tMetadata Version\tDIF Creation Date\tLast DIF Revision Date\tDIF Revision History\tFuture DIF Review Date\tPrivate" << endl;
 
             fout.close();
 
