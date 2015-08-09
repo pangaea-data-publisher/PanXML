@@ -58,7 +58,7 @@ void MainWindow::displayHelp()
     }
     else
     {
-        QString s_ApplicationName = "PanTool";
+        QString s_ApplicationName = "PanXML";
 
         QDesktopServices::openUrl( QUrl( tr( "http://wiki.pangaea.de/wiki/%1" ).arg( s_ApplicationName ) ) );
     }
@@ -1635,7 +1635,10 @@ int MainWindow::incFileProgress( const int i_NumOfFiles, const int i_FileNumber 
 void MainWindow::resetFileProgress( const int i_NumOfFiles )
 {
     if ( i_NumOfFiles > 1 )
+    {
+        FileProgressDialog->hide();
         FileProgressDialog->reset();
+    }
 
     clearStatusMessage();
 
@@ -1797,6 +1800,7 @@ void MainWindow::resetProgress( const int i_NumOfFiles )
         break;
 
     case 1:
+        ProgressDialog->hide();
         ProgressDialog->reset();
         break;
 
