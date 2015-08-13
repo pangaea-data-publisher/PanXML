@@ -33,7 +33,10 @@ int MainWindow::CreateDoiXml( const QString& s_XmlPath, const QString& s_XmlSche
     int             PublicationPlace        = 19;
     int             ProceedingsIdentifier   = 20;
 
+    int             i_NumberOfAuthors       = 0;
+
     QString         s_FilenameOut           = "";
+    QString         s_Authors               = "";
     QString         s_DOI                   = "";
 
     QString         tab                     = "\t";
@@ -65,10 +68,15 @@ int MainWindow::CreateDoiXml( const QString& s_XmlPath, const QString& s_XmlSche
     tout << tab << buildTextEntry( "DOI", s_DOI ) << endl;
     tout << tab << buildTextEntry( "title", InputStr.section( "\t", Title, Title ) ) << endl;
 
-    int i_NumberOfAuthors = InputStr.section( "\t", Authors, Authors ).count( "//" ) + 1;
+    s_Authors = InputStr.section( "\t", Authors, Authors );
+    s_Authors = s_Authors.replace( ";", "//" );
+    s_Authors = s_Authors.replace( " //", "//" );
+    s_Authors = s_Authors.replace( "// ", "//" );
+
+    i_NumberOfAuthors = s_Authors.count( "//" ) + 1;
 
     for ( int j=0; j<i_NumberOfAuthors; j++ )
-        tout << tab << buildTextEntry( "creator", InputStr.section( "\t", Authors, Authors ).section( "//", j, j ) ) << endl;
+        tout << tab << buildTextEntry( "creator", s_Authors.section( "//", j, j ) ) << endl;
 
     tout << tab << "<proceedingsInfo>" << endl;
     tout << tab << tab << buildTextEntry( "title", InputStr.section( "\t", ProceedingsTitle, ProceedingsTitle ) ) << endl;
