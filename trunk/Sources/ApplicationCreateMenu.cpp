@@ -42,7 +42,7 @@ void MainWindow::createActions()
 
     exitAction = new QAction(tr("&Quit"), this);
     exitAction->setShortcut(tr("Ctrl+Q"));
-    connect(exitAction, SIGNAL(triggered()), this, SLOT(close()));
+    connect(exitAction, SIGNAL(triggered()), this, SLOT(exitApplication()));
 
     //AMD
     createAmdXmlAction = new QAction(tr("Dataset list -> XML files for AMD registration"), this);
@@ -114,10 +114,6 @@ void MainWindow::createMenus()
     fileMenu->addAction( openFolderAction );
     fileMenu->addSeparator();
 
-#if defined(Q_OS_LINUX)
-    fileMenu->addAction( exitAction );
-#endif
-
 #if defined(Q_OS_MAC)
     fileMenu->addAction( newWindowAction );
     newWindowAction->setEnabled( false );
@@ -126,9 +122,10 @@ void MainWindow::createMenus()
 
 #if defined(Q_OS_WIN)
     fileMenu->addAction( hideWindowAction );
+#endif
+
     fileMenu->addSeparator();
     fileMenu->addAction( exitAction );
-#endif
 
 // **********************************************************************************************
 

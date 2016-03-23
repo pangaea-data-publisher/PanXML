@@ -246,7 +246,7 @@ void MainWindow::downloadXsdFile( const QString& s_Path, const QString& s_XmlSch
     if ( outfile.exists() == true )
         outfile.remove();
 
-    downloadFile( QLatin1String( "http://www.pangaea.de/curator/files/" ) + s_XmlSchema, s_FilenameLocal );
+    downloadFile( QLatin1String( "https://pangaea.de/curator/files/" ) + s_XmlSchema, s_FilenameLocal );
 }
 
 // **********************************************************************************************
