@@ -5,7 +5,7 @@
 // Application constants
 
     const QString _PROGRAMDOI_          = "doi:10.1594/PANGAEA.746153";
-    const QString _PROGRAMREADME_       = "http://wiki.pangaea.de/wiki/PanXML";
+    const QString _PROGRAMREADME_       = "https://wiki.pangaea.de/wiki/PanXML";
 
     const QString _VERSION_	            = "3.2";	// Version number, 2015-12-28
     const QChar	  _PSEPARATOR_			= '|';
