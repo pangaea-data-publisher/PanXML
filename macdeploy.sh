@@ -49,7 +49,7 @@ cd '/Volumes/PanXML'
 rm -rf .fseventsd
 mkdir .fseventsd
 touch .fseventsd/no_log
-cd ~/Development/Distribution
+cd ~/Development/Distribution/PanXML
 
 echo - verify package
 
@@ -57,3 +57,11 @@ codesign -d '/Volumes/PanXML/PanXML.app'
 
 echo
 hdiutil detach '/Volumes/PanXML'
+
+echo - move application
+
+rm -R /Applications/PanXML.app
+cp -R PanXML.app /Applications
+cd ~/Development/Distribution
+
+echo - finished
