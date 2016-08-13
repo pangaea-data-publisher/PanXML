@@ -9,7 +9,7 @@
 // **********************************************************************************************
 // 2010-10-14
 
-int MainWindow::CreateDoiXml( const QString& s_XmlPath, const QString& s_XmlSchema, const QString& InputStr )
+int MainWindow::CreateDoiXml( const QString &s_XmlPath, const QString &s_XmlSchema, const QString &InputStr )
 {
     int             DOI                     = 0;
     int             Authors                 = 1;

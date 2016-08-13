@@ -9,7 +9,7 @@
 // **********************************************************************************************
 // 2010-10-23
 
-QString MainWindow::buildDoi( const QString& InputStr, const QString& s_ProceedingsTitle, const QString& s_PublicationDate, const QString& s_Volume, const QString& s_FirstPage )
+QString MainWindow::buildDoi( const QString &InputStr, const QString &s_ProceedingsTitle, const QString &s_PublicationDate, const QString &s_Volume, const QString &s_FirstPage )
 {
     QString s_DOI = "10.2312/";
 
@@ -48,7 +48,7 @@ QString MainWindow::buildDoi( const QString& InputStr, const QString& s_Proceedi
 // **********************************************************************************************
 // 2010-10-23
 
-int MainWindow::calcNumOfPages( const QString& s_firstPage, const QString& s_lastPage )
+int MainWindow::calcNumOfPages( const QString &s_firstPage, const QString &s_lastPage )
 {
     int i_FirstPage  = 0;
     int i_LastPage   = 0;
@@ -73,7 +73,7 @@ int MainWindow::calcNumOfPages( const QString& s_firstPage, const QString& s_las
 // **********************************************************************************************
 // 2010-10-24
 
-QString MainWindow::escapeChar( const QString& EntryStr )
+QString MainWindow::escapeChar( const QString &EntryStr )
 {
     QString OutStr = EntryStr;
 
@@ -99,7 +99,7 @@ QString MainWindow::escapeChar( const QString& EntryStr )
 // **********************************************************************************************
 // 2010-10-23
 
-QString MainWindow::buildTextEntry(const QString& s_Tag, const QString& EntryStr, const int i_emptyElement )
+QString MainWindow::buildTextEntry(const QString &s_Tag, const QString &EntryStr, const int i_emptyElement )
 {
     QString OutStr  = "<EMPTY>";
 
@@ -130,7 +130,7 @@ QString MainWindow::buildTextEntry(const QString& s_Tag, const QString& EntryStr
 // **********************************************************************************************
 // 2015-04-03
 
-QString MainWindow::buildEmailEntry( const QString& s_Tag, const QString& EntryStr )
+QString MainWindow::buildEmailEntry( const QString &s_Tag, const QString &EntryStr )
 {
     QString OutStr  = "<EMPTY>";
 
@@ -145,7 +145,7 @@ QString MainWindow::buildEmailEntry( const QString& s_Tag, const QString& EntryS
 // **********************************************************************************************
 // 2015-04-03
 
-QString MainWindow::buildPhoneEntry( const QString& s_Tag, const QString& EntryStr )
+QString MainWindow::buildPhoneEntry( const QString &s_Tag, const QString &EntryStr )
 {
     QString OutStr  = "<EMPTY>";
 
@@ -165,7 +165,7 @@ QString MainWindow::buildPhoneEntry( const QString& s_Tag, const QString& EntryS
 // **********************************************************************************************
 // 2010-10-23
 
-QString MainWindow::buildTextAttributeEntry( const QString& s_Tag, const QString& s_AttributeName, const QString& s_AttributeValue, const QString& EntryStr )
+QString MainWindow::buildTextAttributeEntry( const QString &s_Tag, const QString &s_AttributeName, const QString &s_AttributeValue, const QString &EntryStr )
 {
     QString OutStr  = "<EMPTY>";
 
@@ -182,7 +182,7 @@ QString MainWindow::buildTextAttributeEntry( const QString& s_Tag, const QString
 // **********************************************************************************************
 // 2010-10-24
 
-QString MainWindow::buildIntegerEntry( const QString& s_Tag, const int i_Value )
+QString MainWindow::buildIntegerEntry( const QString &s_Tag, const int i_Value )
 {
     QString OutStr  = "<EMPTY>";
 
@@ -199,7 +199,7 @@ QString MainWindow::buildIntegerEntry( const QString& s_Tag, const int i_Value )
 // **********************************************************************************************
 // 2010-10-24
 
-QString MainWindow::buildIntegerAttributeEntry( const QString& s_Tag, const QString& s_AttributeName, const QString& s_AttributeValue, const int i_Value )
+QString MainWindow::buildIntegerAttributeEntry( const QString &s_Tag, const QString &s_AttributeName, const QString &s_AttributeValue, const int i_Value )
 {
     QString OutStr  = "<EMPTY>";
 
@@ -216,7 +216,7 @@ QString MainWindow::buildIntegerAttributeEntry( const QString& s_Tag, const QStr
 // **********************************************************************************************
 // 2010-10-24
 
-QString MainWindow::buildIdentifierEntry( const QString& s_Tag, const QString& EntryStr )
+QString MainWindow::buildIdentifierEntry( const QString &s_Tag, const QString &EntryStr )
 {
     QString s_Identifier = "";
 
@@ -237,7 +237,7 @@ QString MainWindow::buildIdentifierEntry( const QString& s_Tag, const QString& E
 // ******************************************************************************************************
 // download xsd file
 
-void MainWindow::downloadXsdFile( const QString& s_Path, const QString& s_XmlSchema )
+void MainWindow::downloadXsdFile( const QString &s_Path, const QString &s_XmlSchema )
 {
     QString s_FilenameLocal = s_Path + "/" + s_XmlSchema;
 
@@ -254,7 +254,7 @@ void MainWindow::downloadXsdFile( const QString& s_Path, const QString& s_XmlSch
 // **********************************************************************************************
 // 2014-11-19
 
-int MainWindow::checkXmlFolder( const QString& s_XmlPath, const int n )
+int MainWindow::checkXmlFolder( const QString &s_XmlPath, const int n )
 {
     bool        b_hasXsd = false;
 

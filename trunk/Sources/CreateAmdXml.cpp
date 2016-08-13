@@ -9,7 +9,7 @@
 // **********************************************************************************************
 // 2010-10-14
 
-int MainWindow::CreateAmdXml( const QString& s_XmlPath, const QString& s_XmlSchema, const QString& InputStr )
+int MainWindow::CreateAmdXml( const QString &s_XmlPath, const QString &s_XmlSchema, const QString &InputStr )
 {
     int             i                       = 0;
 
