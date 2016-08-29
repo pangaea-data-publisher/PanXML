@@ -239,14 +239,13 @@ QString MainWindow::buildIdentifierEntry( const QString &s_Tag, const QString &E
 
 void MainWindow::downloadXsdFile( const QString &s_Path, const QString &s_XmlSchema )
 {
-    QString s_FilenameLocal = s_Path + "/" + s_XmlSchema;
+    QString s_Filename = s_Path + "/" + s_XmlSchema;
 
-    QFile outfile( s_FilenameLocal );
+// ******************************************************************************************************
 
-    if ( outfile.exists() == true )
-        outfile.remove();
+    removeFile( s_Filename );
 
-    downloadFile( QLatin1String( "https://pangaea.de/curator/files/" ) + s_XmlSchema, s_FilenameLocal );
+    downloadFile( findCurl(), QLatin1String( "https://pangaea.de/curator/files/" ) + s_XmlSchema, s_Filename );
 }
 
 // **********************************************************************************************

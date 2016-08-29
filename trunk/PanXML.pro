@@ -30,10 +30,6 @@ macx {
 }
 
 win32 {
-    # OpenSSL
-    LIBS += -LC:/Qt/OpenSSL-Win32/bin -lubsec
-    INCLUDEPATH += C:/Qt/OpenSSL-Win32/include
-
     # Icon
     RC_FILE = ./Resources/Application.rc
 }
@@ -50,7 +46,6 @@ INCLUDEPATH += ./Headers
 
 HEADERS = ./Headers/Application.h \
     ./Headers/Globals.h \
-    ./Headers/Webfile.h \
     ./Forms/AboutDialog/AboutDialog.h \
     ./Forms/CreateSingleDoiXmlDialog/CreateSingleDoiXmlDialog.h \
 #   ./Forms/CreateSimpleEPicXmlDialog/CreateSimpleEPicXmlDialog.h \
@@ -65,7 +60,6 @@ SOURCES = ./Sources/ApplicationInit.cpp \
     ./Sources/CreateAmdXml.cpp \
     ./Sources/CreateDoiXml.cpp \
 #   ./Sources/CreateEPicXml.cpp \
-    ./Sources/Webfile.cpp \
     ./Forms/AboutDialog/AboutDialog.cpp \
     ./Forms/CreateSingleDoiXmlDialog/CreateSingleDoiXmlDialog.cpp \
 #   ./Forms/CreateSimpleEPicXmlDialog/CreateSimpleEPicXmlDialog.cpp \

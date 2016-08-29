@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "PanXML"
-!define PRODUCT_VERSION "3.2"
+!define PRODUCT_VERSION "3.3"
 !define PRODUCT_PUBLISHER "PANGAEA"
 !define PRODUCT_WEB_SITE "http://www.pangaea.de"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\PanXML.exe"
@@ -48,6 +48,7 @@ RequestExecutionLevel admin
 Section "MainSection" SEC01
   SetOutPath "$INSTDIR"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\PanXML.exe"
+  File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\curl.exe"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\Qt5Core.dll"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\Qt5Gui.dll"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\Qt5Network.dll"
@@ -55,8 +56,6 @@ Section "MainSection" SEC01
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\libgcc_s_dw2-1.dll"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\libstdc++-6.dll"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\libwinpthread-1.dll"
-  File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\libeay32.dll"
-  File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\ssleay32.dll"
 
   SetOutPath "$INSTDIR\platforms"
   File "C:\Users\rsieger\Documents\Development\Distribution\PanXML\platforms\qminimal.dll"
@@ -100,6 +99,7 @@ FunctionEnd
 
 Section Uninstall
   Delete "$INSTDIR\PanXML.exe"
+  Delete "$INSTDIR\curl.exe"
   Delete "$INSTDIR\Qt5Core.dll"
   Delete "$INSTDIR\Qt5Gui.dll"
   Delete "$INSTDIR\Qt5Network.dll"
@@ -107,8 +107,6 @@ Section Uninstall
   Delete "$INSTDIR\libgcc_s_dw2-1.dll"
   Delete "$INSTDIR\libstdc++-6.dll"
   Delete "$INSTDIR\libwinpthread-1.dll"
-  Delete "$INSTDIR\libeay32.dll"
-  Delete "$INSTDIR\ssleay32.dll"  
   Delete "$INSTDIR\platforms\qminimal.dll"
   Delete "$INSTDIR\platforms\qwindows.dll"
   Delete "$INSTDIR\uninst.exe"
