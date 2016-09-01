@@ -137,19 +137,11 @@ QString MainWindow::getVersion()
 
 int MainWindow::downloadFile( const QString &s_Curl, const QString &s_Url, const QString &s_Filename )
 {
-    QString  s_arg = "";
     QProcess process;
-
-// **********************************************************************************************
 
     removeFile( s_Filename );
 
-    s_arg = "\"" + QDir::toNativeSeparators( s_Curl ) + "\"";
-    s_arg.append( " -o" );
-    s_arg.append( " \"" + QDir::toNativeSeparators( s_Filename ) + "\"" );
-    s_arg.append( " " + s_Url );
-
-    process.start( s_arg );
+    process.start( "\"" + QDir::toNativeSeparators( s_Curl ) + "\" -o \"" + QDir::toNativeSeparators( s_Filename ) + "\"" + " " + s_Url );
     process.waitForFinished( -1 );
 
     return( _NOERROR_ );
