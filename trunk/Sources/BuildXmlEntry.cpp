@@ -245,7 +245,7 @@ void MainWindow::downloadXsdFile( const QString &s_Path, const QString &s_XmlSch
 
     removeFile( s_Filename );
 
-    downloadFile( findCurl(), QLatin1String( "https://pangaea.de/curator/files/" ) + s_XmlSchema, s_Filename );
+    downloadFile( findCurl(), QLatin1String( "https://store.pangaea.de/software/" ) + QCoreApplication::applicationName() + "/" + s_XmlSchema, s_Filename );
 }
 
 // **********************************************************************************************
