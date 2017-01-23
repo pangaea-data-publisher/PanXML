@@ -7,10 +7,10 @@ echo - macdeployqt
 cd ~/Development/GitHub/PanXML
 
 rm -R '../../Distribution/PanXML/PanXML.app'
-cp -R './build-PanXML-Desktop_Qt_5_7_1_clang_64bit-Release/PanXML.app' '../../Distribution/PanXML/PanXML.app'
+cp -R './build-PanXML-Desktop_Qt_5_8_0_clang_64bit-Release/PanXML.app' '../../Distribution/PanXML/PanXML.app'
 cp './trunk/Resources/Info.plist' '../../Distribution/PanXML/PanXML.app/Contents/Info.plist'
 
-/Developer/Qt/5.7/clang_64/bin/macdeployqt '../../Distribution/PanXML/PanXML.app'
+/Developer/Qt/5.8/clang_64/bin/macdeployqt '../../Distribution/PanXML/PanXML.app'
 
 echo - code signing
 
@@ -22,7 +22,6 @@ codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Insti
 
 codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Institut fur Polar- und Meeresforschung (AWI)' '../../Distribution/PanXML/PanXML.app/Contents/PlugIns/bearer/libqcorewlanbearer.dylib'
 codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Institut fur Polar- und Meeresforschung (AWI)' '../../Distribution/PanXML/PanXML.app/Contents/PlugIns/bearer/libqgenericbearer.dylib'
-codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Institut fur Polar- und Meeresforschung (AWI)' '../../Distribution/PanXML/PanXML.app/Contents/PlugIns/imageformats/libqdds.dylib'
 codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Institut fur Polar- und Meeresforschung (AWI)' '../../Distribution/PanXML/PanXML.app/Contents/PlugIns/imageformats/libqgif.dylib'
 codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Institut fur Polar- und Meeresforschung (AWI)' '../../Distribution/PanXML/PanXML.app/Contents/PlugIns/imageformats/libqicns.dylib'
 codesign --force --verify --sign 'Developer ID Application: Alfred-Wegener-Institut fur Polar- und Meeresforschung (AWI)' '../../Distribution/PanXML/PanXML.app/Contents/PlugIns/imageformats/libqico.dylib'
