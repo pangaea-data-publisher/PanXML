@@ -7,10 +7,10 @@ echo - macdeployqt
 cd ~/Development/GitHub/PanXML
 
 rm -R '../../Distribution/PanXML/PanXML.app'
-cp -R './build-PanXML-Desktop_Qt_5_8_0_clang_64bit-Release/PanXML.app' '../../Distribution/PanXML/PanXML.app'
+cp -R './build-PanXML-Desktop_Qt_5_9_0_clang_64bit-Release/PanXML.app' '../../Distribution/PanXML/PanXML.app'
 cp './trunk/Resources/Info.plist' '../../Distribution/PanXML/PanXML.app/Contents/Info.plist'
 
-/Developer/Qt/5.8/clang_64/bin/macdeployqt '../../Distribution/PanXML/PanXML.app'
+/Developer/Qt/5.9/clang_64/bin/macdeployqt '../../Distribution/PanXML/PanXML.app'
 
 echo - code signing
 
